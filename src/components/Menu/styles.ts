@@ -1,3 +1,4 @@
+import theme from '@/styles/theme'
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
@@ -41,14 +42,22 @@ export const MenuGroup = styled.div`
     flex-grow: 1;
     justify-content: flex-end;
     gap:${theme.spacings.xsmall};
+    align-items: center;
   `}
 `
 
-export const MenuNav = styled.nav``
+export const MenuNav = styled.nav`
+  ${({ theme }) => css`
+    ${media.greaterThan('medium')`
+      margin-left: ${theme.spacings.small};
+    `}
+  `}
+`
 
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
+    color: ${theme.colors.white};
     font-size: ${theme.font.sizes.medium};
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
@@ -56,7 +65,7 @@ export const MenuLink = styled.a`
 
     &:hover{
       &::after {
-        content: attr();;;
+        content: "";
         position: absolute;
         display: block;
         height: 0.3rem;
@@ -84,6 +93,9 @@ type MenuFullProps = {
 
 export const MenuFull = styled.nav<MenuFullProps>`
   ${({ theme, isOpen }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: ${theme.colors.white};
     position: absolute;
     top: 0;
@@ -92,6 +104,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
     right: 0;
     height: 100vh;
     overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
     opacity: ${isOpen ? 1 : 0};
     pointer-events: ${isOpen ? 'all' : 'none'};
 
@@ -104,6 +117,49 @@ export const MenuFull = styled.nav<MenuFullProps>`
       width: 2.4rem;
       height: 2.4rem;
     }
+
+    ${MenuNav} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    ${MenuLink} {
+      color: ${theme.colors.black};
+      font-weight: ${theme.font.bold};
+      font-size: ${theme.font.sizes.xlarge};
+      margin-bottom: ${theme.spacings.small};
+      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transition: transform 0.3s ease-in-out;
+    }
+
+    ${RegisterBox} {
+      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transition: transform 0.3s ease-in-out;
+    }
+  `}
+`
+export const RegisterBox = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 ${theme.spacings.xlarge} ${theme.spacings.xlarge};
+
+    > span {
+      display: block;
+      margin: ${theme.spacings.xxsmal} 0;
+      font-size: ${theme.font.sizes.xsmall};
+    }
   `}
 `
 
+export const CreateAccount = styled.a`
+  ${({ theme }) => css`
+    text-decoration: none;
+    color: ${theme.colors.primary};
+    border-bottom: 0.2rem solid ${theme.colors.primary};
+  `}
+`

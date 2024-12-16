@@ -1,16 +1,20 @@
-import { Meta, StoryObj } from '@storybook/react'
-import Menu from '.'
+import { Meta, StoryObj } from "@storybook/react";
+import Menu, { MenuProps } from ".";
 
-export default {
-  title: 'Menu',
-  component: Menu
-} as Meta
+const meta: Meta = {
+  component: Menu,
+};
 
-export const Default: StoryObj = {}
+export default meta;
+
+export const Default: StoryObj = {};
 
 Default.parameters = {
-  layout: 'fullscreen',
+  layout: "fullscreen",
   backgrounds: {
-    default: 'dark'
-  }
-}
+    default: "dark",
+  },
+  args: {
+    username: "",
+  },
+};
