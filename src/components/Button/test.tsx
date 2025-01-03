@@ -62,7 +62,7 @@ describe("<Button />", () => {
 
     expect(screen.getByRole("link", { name: /buy now/i })).toHaveAttribute(
       "href",
-      "link",
+      "/link",
     );
   });
 });
