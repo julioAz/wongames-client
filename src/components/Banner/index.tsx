@@ -1,4 +1,5 @@
 import Button from "../Button";
+import Ribbon, { RibbonColors, RibbonSizes } from "../Ribbon";
 import * as S from "./styles";
 
 export type BannerProps = {
@@ -7,6 +8,9 @@ export type BannerProps = {
   subtitle: string;
   buttonLabel: string;
   buttonLink: string;
+  ribbon?: React.ReactNode;
+  ribbonColor?: RibbonColors;
+  ribbonSize?: RibbonSizes;
 };
 
 const Banner = ({
@@ -15,15 +19,21 @@ const Banner = ({
   subtitle,
   buttonLabel,
   buttonLink,
-}): BannerProps => (
+  ribbon,
+  ribbonColor,
+  ribbonSize,
+}: BannerProps) => (
   <S.Wrapper>
-    <S.Image src={img} role="img" aria-label={title} />
+    {!!ribbon && (
+      <Ribbon color={ribbonColor} size={ribbonSize}>
+        {ribbon}
+      </Ribbon>
+    )}
 
+    <S.Image src={img} role="img" aria-label={title} />
     <S.Caption>
-      <S.title>{title}</S.title>
-      <S.SubTitle dangerouslySetInnerHTML={{ __html: subtitle }}>
-        {subtitle}
-      </S.SubTitle>
+      <S.Title>{title}</S.Title>
+      <S.Subtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
       <Button as="a" href={buttonLink} size="large">
         {buttonLabel}
       </Button>
